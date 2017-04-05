@@ -10,4 +10,4 @@ instructions in the README for this repo
 
 # Build
 
-	docker build -t pedros007/debian-mapserver:7.0.3 .
+	docker build -t pedros007/debian-mapserver:7.0.4 .

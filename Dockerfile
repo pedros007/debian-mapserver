@@ -1,4 +1,4 @@
-FROM pedros007/debian-gdal:2.1.2
+FROM pedros007/debian-gdal:2.1.3
 MAINTAINER Peter Schmitt "pschmitt@gmail.com"
 
 RUN apt-get update && apt-get upgrade -y && \
@@ -8,9 +8,9 @@ RUN apt-get update && apt-get upgrade -y && \
     shapelib libproj-dev libgeos-dev libpq-dev \
     libxml2 libxml2-dev libpng-dev zlib1g zlib1g-dev libjpeg-dev libfribidi0 libfribidi-dev libfreetype6 libfreetype6-dev libharfbuzz0b libharfbuzz-dev \
     -y --no-install-recommends && \
-    curl http://download.osgeo.org/mapserver/mapserver-7.0.3.tar.gz | tar zx -C /tmp && \
-    mkdir /tmp/mapserver-7.0.3/build && \
-    cd /tmp/mapserver-7.0.3/build && \
+    curl http://download.osgeo.org/mapserver/mapserver-7.0.4.tar.gz | tar zx -C /tmp && \
+    mkdir /tmp/mapserver-7.0.4/build && \
+    cd /tmp/mapserver-7.0.4/build && \
     cmake .. -DWITH_GDAL=1 -DWITH_CURL=1 -DWITH_CAIRO=0 -DWITH_GIF=0 && \
     make -j $(grep --count ^processor /proc/cpuinfo) && \
     make install && \
@@ -20,8 +20,8 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN rm /etc/nginx/sites-enabled/default
 ADD etc /etc
 
-RUN mkdir -p /usr/src
-COPY mapfiles /usr/src/mapfiles
+###RUN mkdir -p /usr/src
+###COPY mapfiles /usr/src/mapfiles
 
 EXPOSE 80
 CMD sh -c "/usr/bin/supervisord"
