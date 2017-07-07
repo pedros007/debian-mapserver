@@ -1,4 +1,4 @@
-FROM pedros007/debian-gdal:2.2.0
+FROM pedros007/debian-gdal:trunk_r39502
 MAINTAINER Peter Schmitt "pschmitt@gmail.com"
 
 RUN apt-get update && apt-get upgrade -y && \
@@ -22,6 +22,10 @@ ADD etc /etc
 
 ###RUN mkdir -p /usr/src
 ###COPY mapfiles /usr/src/mapfiles
+
+# Set HOME dir so AWS credentials can be fetched at ~/.aws/credentials
+# https://lists.osgeo.org/pipermail/gdal-dev/2017-July/046846.html
+ENV HOME /root
 
 EXPOSE 80
 CMD sh -c "/usr/bin/supervisord"
