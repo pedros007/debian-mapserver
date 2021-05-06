@@ -1,4 +1,4 @@
-FROM pedros007/python3-gdal:2.4.0
+FROM pedros007/python3-gdal:2.4.4
 MAINTAINER Peter Schmitt "pschmitt@gmail.com"
 
 RUN \
@@ -12,7 +12,8 @@ RUN \
 	    cmake \
 	    make \
 	    ca-certificates \
-	    curl \
+            curl \
+            libcurl3-gnutls \
 	    libcurl4-gnutls-dev \
 	    libfcgi0ldbl \
 	    libfcgi-dev \
@@ -35,9 +36,9 @@ RUN \
     	    protobuf-c-compiler \
 	    libprotobuf-c-dev && \
 # Build MapServer
-    curl http://download.osgeo.org/mapserver/mapserver-7.2.2.tar.gz | tar zx -C /tmp && \
-    mkdir /tmp/mapserver-7.2.2/build && \
-    cd /tmp/mapserver-7.2.2/build && \
+    curl http://download.osgeo.org/mapserver/mapserver-7.6.2.tar.gz | tar zx -C /tmp && \
+    mkdir /tmp/mapserver-7.6.2/build && \
+    cd /tmp/mapserver-7.6.2/build && \
     cmake .. -DWITH_GDAL=1 -DWITH_CURL=1 -DWITH_CAIRO=0 -DWITH_GIF=0 && \
     make -j $(grep --count ^processor /proc/cpuinfo) && \
     make install && \
