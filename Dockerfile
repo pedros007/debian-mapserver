@@ -36,10 +36,10 @@ RUN \
     	    protobuf-c-compiler \
 	    libprotobuf-c-dev && \
 # Build MapServer
-    curl http://download.osgeo.org/mapserver/mapserver-7.6.2.tar.gz | tar zx -C /tmp && \
-    mkdir /tmp/mapserver-7.6.2/build && \
-    cd /tmp/mapserver-7.6.2/build && \
     cmake .. -DWITH_GDAL=1 -DWITH_CURL=1 -DWITH_CAIRO=0 -DWITH_GIF=0 && \
+    curl http://download.osgeo.org/mapserver/mapserver-7.6.3.tar.gz | tar zx -C /tmp && \
+    mkdir /tmp/mapserver-7.6.3/build && \
+    cd /tmp/mapserver-7.6.3/build && \
     make -j $(grep --count ^processor /proc/cpuinfo) && \
     make install && \
 # Clean up
