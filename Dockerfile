@@ -27,6 +27,9 @@ RUN \
 	    zlib1g \
 	    zlib1g-dev \
 	    libjpeg-dev \
+	    libgif-dev \
+	    libcairo2 \
+	    libcairo2-dev \
 	    libfribidi0 \
 	    libfribidi-dev \
 	    libfreetype6 \
@@ -36,10 +39,10 @@ RUN \
     	    protobuf-c-compiler \
 	    libprotobuf-c-dev && \
 # Build MapServer
-    cmake .. -DWITH_GDAL=1 -DWITH_CURL=1 -DWITH_CAIRO=0 -DWITH_GIF=0 && \
     curl http://download.osgeo.org/mapserver/mapserver-7.6.3.tar.gz | tar zx -C /tmp && \
     mkdir /tmp/mapserver-7.6.3/build && \
     cd /tmp/mapserver-7.6.3/build && \
+    cmake .. -DWITH_CURL=1 -DWITH_CAIRO=1 && \
     make -j $(grep --count ^processor /proc/cpuinfo) && \
     make install && \
 # Clean up
